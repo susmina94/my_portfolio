@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Susmina Manandhar - Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --dark-bg: #0a0a0a;
+            --dark-secondary: #141414;
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.8);
+            --accent-blue: #5b9aff;
+            --gradient-purple: #6b46c1;
+            --gradient-blue: #3b82f6;
+            --text-muted: rgba(255, 255, 255, 0.6);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--dark-bg);
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Grainy texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noise)" opacity="0.05"/></svg>');
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Top Navigation */
+        .top-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 20px 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-blue);
+        }
+
+        .nav-links a.active {
+            background: var(--accent-blue);
+            color: var(--text-primary);
+            padding: 8px 16px;
+            border-radius: 4px;
+        }
+
+        .nav-contact {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .nav-contact a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-contact::after {
+            content: '';
+            width: 200px;
+            height: 1px;
+            background: var(--text-primary);
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+        .nav-contact::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--text-primary);
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 60px 80px;
+            position: relative;
+            background: var(--dark-bg);
+        }
+
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--gradient-purple) 0%, var(--gradient-blue) 100%);
+            opacity: 0.3;
+            z-index: 0;
+            clip-path: polygon(30% 0, 100% 0, 100% 100%, 0% 100%);
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .hero-greeting {
+            color: var(--accent-blue);
+            font-size: 1rem;
+            font-weight: 400;
+            font-style: italic;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .hero-name {
+            font-size: 4.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 30px;
+            color: var(--text-primary);
+        }
+
+        .hero-profession {
+            display: inline-block;
+            background: var(--accent-blue);
+            color: var(--text-primary);
+            padding: 12px 24px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 40px;
+            width: fit-content;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin-bottom: 40px;
+        }
+
+        .hero-image {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .profile-image-container {
+            width: 400px;
+            height: 500px;
+            background: linear-gradient(135deg, var(--gradient-purple), var(--gradient-blue));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+        }
+
+        /* Content Sections */
+        .content-section {
+            padding: 100px 60px;
+            position: relative;
+            background: var(--dark-bg);
+            min-height: 100vh;
+        }
+
+        .content-section h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 60px;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .bio {
+            font-size: 1.15rem;
+            line-height: 1.9;
+            color: var(--text-secondary);
+            max-width: 900px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 40px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .experience-item, .education-item {
+            margin-bottom: 40px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .experience-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--accent-blue);
+            transform: translateY(-5px);
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+            gap: 20px;
+        }
+
+        .experience-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+        }
+
+        .experience-company {
+            font-size: 1.1rem;
+            color: var(--accent-blue);
+            font-weight: 500;
+        }
+
+        .experience-date {
+            color: var(--text-muted);
+            font-weight: 500;
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+
+        .experience-item ul {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 25px;
+        }
+
+        .experience-item li {
+            padding: 12px 0 12px 30px;
+            position: relative;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .experience-item li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent-blue);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .skill-category {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 40px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .skill-category:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--accent-blue);
+            transform: translateY(-5px);
+        }
+
+        .skill-category h4 {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            color: var(--text-primary);
+            font-weight: 700;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .skill-category ul {
+            list-style: none;
+        }
+
+        .skill-category li {
+            padding: 10px 0 10px 25px;
+            color: var(--text-secondary);
+            position: relative;
+            line-height: 1.7;
+        }
+
+        .skill-category li:before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: var(--accent-blue);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .awards-list {
+            list-style: none;
+            padding-left: 0;
+            display: grid;
+            gap: 20px;
+        }
+
+        .awards-list li {
+            padding: 30px 40px 30px 80px;
+            position: relative;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .awards-list li:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--accent-blue);
+            transform: translateX(10px);
+        }
+
+        .awards-list li:before {
+            content: "🏆";
+            position: absolute;
+            left: 30px;
+            font-size: 2rem;
+        }
+
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+
+            .hero-name {
+                font-size: 3.5rem;
+            }
+
+            .profile-image-container {
+                width: 100%;
+                max-width: 400px;
+                height: 400px;
+                margin: 0 auto;
+            }
+
+            .top-nav {
+                padding: 20px 40px;
+            }
+
+            .nav-links {
+                gap: 25px;
+                font-size: 0.85rem;
+            }
+
+            .nav-contact::after {
+                width: 100px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .top-nav {
+                padding: 15px 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                gap: 15px;
+                justify-content: center;
+            }
+
+            .nav-contact {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .nav-contact::before,
+            .nav-contact::after {
+                display: none;
+            }
+
+            .hero-section {
+                padding: 100px 30px 60px;
+            }
+
+            .hero-name {
+                font-size: 2.5rem;
+            }
+
+            .content-section {
+                padding: 60px 30px;
+            }
+
+            .content-section h2 {
+                font-size: 2rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .experience-header {
+                flex-direction: column;
+            }
+
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+        <ul class="nav-links">
+            <li><a href="#" class="active" data-section="about">Portfolio</a></li>
+            <li><a href="#" data-section="about-detail">About Me</a></li>
+            <li><a href="#" data-section="experience">Experience</a></li>
+            <li><a href="#" data-section="education">Education</a></li>
+            <li><a href="#" data-section="projects">Projects</a></li>
+            <li><a href="#" data-section="training">Training</a></li>
+            <li><a href="#" data-section="skills">Skills</a></li>
+            <li><a href="#" data-section="awards">Awards</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section content-section" id="about-section">
+        <div class="hero-content">
+            <div class="hero-text">
+                <div class="hero-greeting">Hello !!!</div>
+                <h1 class="hero-name">I'm Susmina Manandhar</h1>
+                <div class="hero-profession">GIS Professional</div>
+                <p class="hero-description">
+                    A Product Lead and GIS Specialist with 4+ years of professional experience working with local, national and global stakeholders across 15+ geospatial projects. I specialize in geospatial intelligence for digital governance, urban planning, environmental monitoring, and disaster risk reduction.
+                </p>
+            </div>
+            <div class="hero-image">
+                <div class="profile-image-container">
+                    <img src="susmina.jpg" alt="Susmina Manandhar">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="content-section" id="about-detail-section">
+        <div class="container">
+            <h2>About Me</h2>
+            <div class="bio">
+                <p>With 4+ years of professional experience working with local, national and global stakeholders across 15+ geospatial projects, majorly focussing on the effective use of geospatial intelligence in digital governance, urban planning, environmental monitoring, open geospatial data, and disaster risk reduction, I strongly believe this advanced course will further strengthen my core technical expertise widening the horizon of impact across more sectors and beyond borders.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="content-section" id="experience-section">
+        <div class="container">
+            <h2>Experience</h2>
+            
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <div class="experience-title">Product Lead, DASTAA</div>
+                        <div class="experience-company">NAXA Private Limited, Om Kareshwor Marga, Kathmandu, Nepal</div>
+                    </div>
+                    <div class="experience-date">Sept, 2024 - Present</div>
+                </div>
+                <ul>
+                    <li>Lead the concept and development of a geospatial product (DASTAA) supporting the DRR&CCA ecosystem</li>
+                    <li>Guide the integration of GIS and EO datasets to generate multi-hazard models for preliminary risk assessment and impact forecasting solution</li>
+                    <li>Facilitate co-creation workshops and user research with governments, humanitarian actors, technical agencies, and at-risk communities to understand the gaps in DRR&CCA tools</li>
+                    <li>Work closely with engineering, GIS, DRR, data science, and design teams to deliver actionable and user-centric solution</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <div class="experience-title">GIS Product Manager, GeoNadir</div>
+                        <div class="experience-company">NAXA Private Limited, Om Kareshwor Marga, Kathmandu, Nepal</div>
+                    </div>
+                    <div class="experience-date">Sept, 2023 - Aug, 2024</div>
+                </div>
+                <ul>
+                    <li>Worked closely with GeoNadir executives to develop a roadmap that enhance the platform's GIS capabilities combined with EO datasets for environmental monitoring and wildlife ecosystem mapping</li>
+                    <li>Led the development of 15+ geospatial analytical features in GeoNadir such as change detection, AI based feature digitization, indices calculation, random forest classification, etc</li>
+                    <li>Worked with an Australian data scientist to understand and document QGIS workflows supported for complex geospatial data analytics specifically raster processing operations</li>
+                    <li>Worked as a quality control analyst to ensure and maintain the delivery of high quality development standards</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <div class="experience-title">Associate GIS Project Manager</div>
+                        <div class="experience-company">NAXA Private Limited, Om Kareshwor Marga, Kathmandu, Nepal</div>
+                    </div>
+                    <div class="experience-date">Sept, 2021 - Aug, 2023</div>
+                </div>
+                <ul>
+                    <li>Worked with 8 municipalities as a GIS Analyst, conducted participatory mapping with local stakeholders and prepared municipal spatial database for coordinated planning and development</li>
+                    <li>Served as a liaison with the National Survey Department to upload, style, manage and publish national scale spatial data and metadata using Geoserver</li>
+                    <li>Developed hazard monitoring modules in collaboration with IHRR by combining hydro-meteorological information with EO datasets, including soil moisture, temperature, and precipitation, to analyze heatwave, coldwave, drought, and cascading hazards</li>
+                    <li>Designed a GIS-based metric addressing framework using Python to support urban planning and improve municipal service delivery</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section class="content-section" id="education-section">
+        <div class="container">
+            <h2>Education</h2>
+            <div class="education-item">
+                <div class="experience-header">
+                    <div>
+                        <div class="experience-title">Bachelor's Degree in Geomatics Engineering</div>
+                        <div class="experience-company">Western Regional Campus, Tribhuvan University, Nepal</div>
+                    </div>
+                    <div class="experience-date">2016 - 2021</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="content-section" id="projects-section">
+        <div class="container">
+            <h2>Projects</h2>
+            
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <div class="experience-title">DASTAA - Geospatial Product for DRR&CCA</div>
+                        <div class="experience-company">NAXA Private Limited</div>
+                    </div>
+                    <div class="experience-date">2024 - Present</div>
+                </div>
+                <ul>
+                    <li>Lead the concept and development of a geospatial product supporting the Disaster Risk Reduction & Climate Change Adaptation ecosystem</li>
+                    <li>Integration of GIS and Earth Observation datasets for multi-hazard modeling and risk assessment</li>
+                    <li>Impact forecasting solutions for disaster management</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <div class="experience-title">GeoNadir Platform Enhancement</div>
+                        <div class="experience-company">NAXA Private Limited</div>
+                    </div>
+                    <div class="experience-date">2023 - 2024</div>
+                </div>
+                <ul>
+                    <li>Led development of 15+ geospatial analytical features including change detection, AI-based feature digitization, indices calculation, and random forest classification</li>
+                    <li>Enhanced GIS capabilities combined with EO datasets for environmental monitoring and wildlife ecosystem mapping</li>
+                    <li>Documented QGIS workflows for complex geospatial data analytics and raster processing operations</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <div class="experience-title">Municipal Spatial Database Development</div>
+                        <div class="experience-company">8 Municipalities, Nepal</div>
+                    </div>
+                    <div class="experience-date">2021 - 2023</div>
+                </div>
+                <ul>
+                    <li>Conducted participatory mapping with local stakeholders for coordinated planning and development</li>
+                    <li>Prepared municipal spatial databases for multiple municipalities</li>
+                    <li>Designed GIS-based metric addressing framework using Python to support urban planning</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <div class="experience-title">Hazard Monitoring Modules</div>
+                        <div class="experience-company">In collaboration with IHRR</div>
+                    </div>
+                    <div class="experience-date">2021 - 2023</div>
+                </div>
+                <ul>
+                    <li>Developed hazard monitoring modules combining hydro-meteorological information with EO datasets</li>
+                    <li>Analysis of heatwave, coldwave, drought, and cascading hazards using soil moisture, temperature, and precipitation data</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <div class="experience-title">National Spatial Data Management</div>
+                        <div class="experience-company">National Survey Department, Nepal</div>
+                    </div>
+                    <div class="experience-date">2021 - 2023</div>
+                </div>
+                <ul>
+                    <li>Served as liaison for uploading, styling, managing and publishing national scale spatial data and metadata using Geoserver</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Training Section -->
+    <section class="content-section" id="training-section">
+        <div class="container">
+            <h2>Training & Workshops</h2>
+            
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <div class="experience-title">Community-Based GIS Training</div>
+                        <div class="experience-company">Various Communities, Nepal</div>
+                    </div>
+                    <div class="experience-date">2021 - Present</div>
+                </div>
+                <ul>
+                    <li>Delivered 15+ community-based GIS trainings for successful project implementation</li>
+                    <li>Conducted participatory mapping workshops with local stakeholders</li>
+                    <li>Capacity building programs for inclusive geospatial and planning practices</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <div class="experience-title">In-House GIS Skill Development</div>
+                        <div class="experience-company">NAXA Private Limited</div>
+                    </div>
+                    <div class="experience-date">2022 - Present</div>
+                </div>
+                <ul>
+                    <li>Led quarterly in-house GIS based skill development trainings and workshops</li>
+                    <li>Built organizational capacity through technical training programs</li>
+                    <li>Team skill enhancement across multiple departments</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <div class="experience-title">Public Speaking & Presentations</div>
+                        <div class="experience-company">National & International Events</div>
+                    </div>
+                    <div class="experience-date">2021 - Present</div>
+                </div>
+                <ul>
+                    <li>Delivered presentations at 10+ national and international events, panel discussions and conferences</li>
+                    <li>Effective public speaking and emceeing at professional gatherings</li>
+                    <li>Knowledge sharing on geospatial intelligence and applications</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <div class="experience-title">Women in Geospatial Nepal - Mentoring</div>
+                        <div class="experience-company">Co-founder & Active Contributor</div>
+                    </div>
+                    <div class="experience-date">2021 - Present</div>
+                </div>
+                <ul>
+                    <li>Organized hackathons and mentoring sessions</li>
+                    <li>Advocacy and capacity building for women in geospatial fields</li>
+                    <li>Promoted inclusive geospatial and planning practices</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="content-section" id="skills-section">
+        <div class="container">
+            <h2>Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h4>Communication Skills</h4>
+                    <ul>
+                        <li>Proven track record of strong communication and stakeholder management for the client-facing Product/Project Manager roles</li>
+                        <li>Demonstrated effective public speaking and emceeing skills at more than 10 national and international events, panel discussions and conferences</li>
+                        <li>Delivered 15+ community-based GIS trainings for successful project implementation</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h4>Organisational/Managerial Skills</h4>
+                    <ul>
+                        <li>Past 2 years of experience operating as a middle-management leader contributing to organizational vision of expanding NAXA's presence in the Global South (Bangladesh, Malawi, Indonesia), strengthening operational strategy, inter-department coordination and supporting the hiring of high-performing talent</li>
+                        <li>Leading the Project Management Department of 7–10 member team with responsibility for team leadership and end-to-end project execution</li>
+                        <li>Led quarterly in-house GIS based skill development trainings and workshops to build organizational capacity</li>
+                        <li>Successfully delivered 15+ projects by fostering strong team collaboration across departments, working with 100+ team members</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h4>Job-related Skills</h4>
+                    <ul>
+                        <li>Leading end-to-end GIS product development: planning, design, prototyping, and deployment</li>
+                        <li>Ability to translate planning requirements into technical and spatial designs</li>
+                        <li>Spatial research and analysis using Google Earth Engine (GEE)</li>
+                        <li>Experience conducting analytical studies for flood hazard modeling (2D) using HECRAS</li>
+                        <li>Understanding of software development workflows, APIs, and integration with digital tools</li>
+                        <li>Strong documentation, reporting, and professional presentation skills</li>
+                        <li>Experience with project management software for tracking, collaboration, and agile workflows</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h4>Digital Competence</h4>
+                    <ul>
+                        <li><strong>Product and design tools:</strong> Figma, Miro, JIRA, Trello, Draw.io, Confluence, MS Package - Advanced</li>
+                        <li><strong>Geospatial Applications:</strong> QGIS, ArcGIS, HECRAS, Geoserver, ENVI, JOSM Editor, UAV, GNSS - Advanced</li>
+                        <li><strong>Development:</strong> Jupyter Notebook, GEE - Intermediate</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h4>Other Skills</h4>
+                    <ul>
+                        <li>Community Volunteering, Women Leadership & Gender Advocacy: Co-founder and active contributor to Women in Geospatial Nepal, with hands-on experience in organizing hackathon, mentoring, advocacy, and capacity building for inclusive geospatial and planning practices</li>
+                        <li>Website Development: Developed the official website (backend and frontend) for Women in Geospatial Nepal as part of a personal project</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Awards Section -->
+    <section class="content-section" id="awards-section">
+        <div class="container">
+            <h2>Honours and Awards</h2>
+            <ul class="awards-list">
+                <li><strong>Certified Scrum Master</strong> - 2023</li>
+                <li><strong>Engineering Scholar</strong>, Bo. M Karlsson Foundation (BMKF) - 2016-2021</li>
+            </ul>
+        </div>
+    </section>
+
+    <script>
+        // Scroll spy functionality
+        function updateActiveNav() {
+            const sections = document.querySelectorAll('.content-section');
+            const navLinks = document.querySelectorAll('.nav-links a');
+            const scrollPosition = window.scrollY + 200;
+
+            let currentSection = '';
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                const sectionId = section.getAttribute('id');
+
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    // Handle about-detail-section specifically
+                    if (sectionId === 'about-detail-section') {
+                        currentSection = 'about-detail';
+                    } else {
+                        currentSection = sectionId.replace('-section', '');
+                    }
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                const sectionId = link.getAttribute('data-section');
+                
+                // Portfolio is active for hero/about section
+                if (currentSection === 'about' && sectionId === 'about') {
+                    link.classList.add('active');
+                }
+                // About Me is active for about-detail section
+                else if (currentSection === 'about-detail' && sectionId === 'about-detail') {
+                    link.classList.add('active');
+                }
+                // Other sections match normally
+                else if (sectionId === currentSection) {
+                    link.classList.add('active');
+                }
+            });
+
+            // At the very top, activate Portfolio
+            if (window.scrollY < 300) {
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('data-section') === 'about') {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        }
+
+        // Smooth scroll to section
+        function scrollToSection(sectionId) {
+            let targetId = sectionId + '-section';
+            if (sectionId === 'about') {
+                targetId = 'about-section'; // Portfolio links to hero section
+            }
+            const targetSection = document.getElementById(targetId);
+            if (targetSection) {
+                const offset = 80;
+                const elementPosition = targetSection.offsetTop;
+                const offsetPosition = elementPosition - offset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        // Navigation link click handlers
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const sectionId = this.getAttribute('data-section');
+                if (sectionId) {
+                    scrollToSection(sectionId);
+                }
+            });
+        });
+
+        // Scroll event listener for scroll spy
+        let scrollTimeout;
+        window.addEventListener('scroll', function() {
+            if (scrollTimeout) {
+                window.cancelAnimationFrame(scrollTimeout);
+            }
+            scrollTimeout = window.requestAnimationFrame(updateActiveNav);
+        });
+
+        // Initial active state
+        updateActiveNav();
+    </script>
+</body>
+</html>
